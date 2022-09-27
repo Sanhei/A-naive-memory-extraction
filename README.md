@@ -14,10 +14,11 @@ which in the document parameter.h saved all the parameter we need, and the integ
 And it will generate a .txt file which record each step of time position. And a single example:
 ![alt text](https://github.com/Sanhei/A-naive-memory-extraction/blob/main/0.005_traj.svg?raw=true)
 ## Trajectory analyse.
-We need to extract the memory kernel, which is $$\gamma = \int^\infty_0\Gamma(t)$$.
-To calculate this part, we need to get the correlation function of $$C_{vv}$$ and $$C_{\triangledown U x}$$.
-### $$\triangledown U$$
-For calculating $$\triangledown U$$, we use free energy, which get from the distribution of the position. Therefore, potential.h gives three function.
+We need to extract the memory kernel, which is 
+$$\gamma = \int^\infty_0\Gamma(t)$$.
+To calculate this part, we need to get the correlation function of $C_{vv}$ and $C_{\triangledown U x}$.
+### Potential gradient $\triangledown U$
+For calculating $\triangledown U$, we use free energy, which get from the distribution of the position. Therefore, potential.h gives three function.
 1. Histogram calculation, which will record the distribution of position in the trajectory. And $$F = -k_BTln(P(x))$$, so this can directly transfer to potential.
 2. Gradient of potential.
 3. Calculate a small area around boundary, because the behavior is not like stochastic behavior. So will print out how much influnce on the whole calculation. And a corretion, which may a little bit shift due numerical error.
@@ -57,4 +58,4 @@ make
 Then the data and all figures will in the "figure" director.
 ## Space and Memory
 For now, we use 2GB trajectory, for several parameter settings, it works. However it is not enough, so maybe we want to try 8GB trajectory. As for memory occupied, FFT may use three times bigger than the trajectory size. So for each time correlation function, we record it in a text file, and read it again.
-The thing we need to care about is $$C_{\triangledown U x}$$, We need to record an additional trajectory size. So in total, it will $$\mathbf{8}$$ times bigger memory. For the optimization, we just use one core, and didn't set the threads. For FFTW, it should be defined as 4.
+The thing we need to care about is $C_{\triangledown U x}$, We need to record an additional trajectory size. So in total, it will $\mathbf{8}$ times bigger memory. For the optimization, we just use one core, and didn't set the threads. For FFTW, it should be defined as 4.
