@@ -33,16 +33,25 @@ This part, we do correlation function, first we need to calculate the velocity. 
 
 ## Memory kernel Calculation.
 Here we use the equation from paper(Non-markov protien folding).
-$$G_n = \frac{2}{\Delta t C^{vv}_0} (C^{\triangledown U q}_n -\frac{C^{\triangledown U q}}{C^{vv}_0} - \Delta t\sum^{n-1}_{i=1}G_{n-i}C^{vv}_i)$$.
-Then all the calculation done.
+
+$$G_n = \frac{2}{\Delta t C^{vv}_0} (C^{\triangledown U q}_n -\frac{C^{\triangledown U q}}{C^{vv}_0} - \Delta t\sum^{n-1}_{i=1}G_{n-i}C^{vv}_i)$$. 
+![alt text](https://github.com/Sanhei/A-naive-memory-extraction/blob/main/Gplot.png?raw=true)
+
+(Somehow it cannot show the right format of the equation.)Then all the calculation done.
 
 ## Program explain.
 In our program, we can call matplotlib function in python to directly plot the Potential and Correlaiton. And in the end, after the calculation, program can automatically call the fitting.py, which uses lmfit package to do the fitting. Here we may need the python package path to include this environment.
 ## Runing the program.
+Environment:
+GCC 14++ or higher version.
+FFTW.
+For fitting part and plotting, we use python. There we may use the package
+
 ```bash
 export PYTHONPATH="~/python_path/lib/python3.x/site-packages"
 ```
-This is to include the path of python, but this step may not necessary, since we can comment all the code of python, the simulation is all done by C++ code.
+This is to include the path of python, but this step may not necessary, since fourier transfer can be very time consuming, therefore, we want to see if the parameter setting is proper. So we may want to see if the free energy profile is same as we expected(a double well potential showed before). before the Fourier transfer.
+By default, we comment all the code of python. The simulation is all done by C++ code. Setting the environment can be frustrated. Another thing you may need is FFTW 
 
 ```bash
 cd timestep_changing
